@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#D42062">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<title>Kiki TV Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F6FF;--card:#fff;--ink:#1B1F3B;--mut:#5F6588;--line:#D9DEF5;--pink:#FF4D8D;--sun:#FFC93C;--mint:#2DD4BF;--onk:#1B1F3B;--k:var(--pink);--fd:"Baloo 2","Trebuchet MS",system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root{--bg:#14172B;--card:#1E2240;--ink:#F2F3FF;--mut:#A6ABD1;--line:#343A66}}
+#v-tasks{--k:var(--pink)}#v-ideas{--k:var(--sun)}#v-prompts{--k:var(--mint)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;justify-content:space-between;align-items:center;padding:12px 16px 18px;padding-top:calc(12px + env(safe-area-inset-top))}
+header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:linear-gradient(90deg,#E4E7F7 0 14.28%,#FFD400 0 28.57%,#00C2D1 0 42.85%,#22C55E 0 57.14%,#FF3D9A 0 71.42%,#EF4444 0 85.71%,#3B5BFF 0);animation:sweep .9s ease-out}
+@keyframes sweep{from{clip-path:inset(0 100% 0 0)}}
+.brand{display:flex;align-items:center;gap:10px}
+.tv{width:42px;height:38px;color:var(--ink);flex:none}
+.brand b{font:800 27px/1 var(--fd);display:block}
+.brand small{color:var(--mut);font-size:13px}
+main{max-width:560px;margin:0 auto}
+.sec{padding:4px 16px 14px}
+main>div>.sec:first-child{margin:18px 16px 8px;padding:16px;border:2px solid var(--ink);border-radius:20px;background:var(--card);background:color-mix(in srgb,var(--k) 20%,var(--card));box-shadow:5px 5px 0 var(--k)}
+h2{font:700 22px/1.1 var(--fd);margin:10px 0 12px}
+main>div>.sec:first-child h2{margin-top:0}
+.mut{color:var(--mut);font-size:14px}
+button,.filebtn{font:inherit;cursor:pointer}
+.btn{background:var(--k);color:var(--onk);border:2px solid var(--ink);border-radius:12px;padding:8px 18px;font:700 17px/1.3 var(--fd);box-shadow:3px 3px 0 var(--ink)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.ghost{background:var(--card);color:var(--ink);border:2px solid var(--ink);border-radius:12px;padding:7px 14px;font:600 15px/1.3 var(--fd)}
+.in{width:100%;font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:10px 12px;margin-bottom:10px}
+.in::placeholder{color:var(--mut)}
+.in:focus{outline:0;box-shadow:3px 3px 0 var(--k)}
+textarea.in{resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.item{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:12px 14px;margin:0 0 16px;box-shadow:4px 4px 0 var(--k)}
+.item.done{opacity:.6;box-shadow:none}
+.item b{font:700 18px/1.25 var(--fd)}
+.item.done b{text-decoration:line-through}
+.chk{display:flex;gap:12px;align-items:center;margin:0}
+.chk input{-webkit-appearance:none;appearance:none;width:26px;height:26px;border:2px solid var(--ink);border-radius:8px;background:var(--card);flex:none;display:grid;place-content:center;cursor:pointer}
+.chk input:checked{background:var(--k)}
+.chk input:checked::after{content:"";width:6px;height:12px;border:solid var(--onk);border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px);animation:pop .18s ease-out}
+@keyframes pop{from{transform:rotate(45deg) translate(-1px,-1px) scale(0)}}
+.how{color:var(--mut);font-size:15px;margin:6px 0 10px;white-space:pre-wrap}
+.chk+.how{margin-left:38px}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.chk+.acts{margin-top:10px}
+.acts button{background:none;border:1.5px solid var(--ink);color:var(--ink);border-radius:9px;padding:4px 11px;font-size:14px}
+.acts button.p{background:var(--k);color:var(--onk);font-weight:600}
+nav{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));max-width:536px;margin:0 auto;display:flex;gap:4px;padding:5px;background:var(--card);border:2px solid var(--ink);border-radius:22px;box-shadow:4px 4px 0 var(--ink)}
+nav button{flex:1;background:none;border:0;border-radius:16px;color:var(--ink);padding:9px 4px;font:600 17px/1.3 var(--fd)}
+nav button.on{color:var(--onk)}
+nav [data-tab=tasks].on{background:var(--pink)}
+nav [data-tab=ideas].on{background:var(--sun)}
+nav [data-tab=prompts].on{background:var(--mint)}
+dialog{border:2px solid var(--ink);border-radius:20px;padding:18px;width:min(92vw,400px);background:var(--card);color:var(--ink);box-shadow:6px 6px 0 var(--k)}
+dialog::backdrop{background:rgba(20,23,43,.6)}
+#toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:14px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+#toast.on{opacity:1}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <svg class="tv" viewBox="0 0 40 36" aria-hidden="true"><path d="M12 3l8 8 8-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="3" y="10" width="34" height="23" rx="7" fill="#FF4D8D" stroke="currentColor" stroke-width="2.5"/><path d="M17 16.5v10l8.5-5z" fill="#fff"/></svg>
+    <div><b>Kiki TV</b><small>channel plan</small></div>
+  </div>
+  <button class="ghost" data-act="backup">Backup</button>
+</header>
+<main>
+  <div id="v-tasks"></div>
+  <div id="v-ideas" hidden></div>
+  <div id="v-prompts" hidden></div>
+</main>
+<nav>
+  <button data-tab="tasks" id="n-tasks">Kaam</button>
+  <button data-tab="ideas">Ideas</button>
+  <button data-tab="prompts">Prompts</button>
+</nav>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status"></div>
+
+<script>
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const KEY='kikitv_v2';
+const SEED=[
+['Roz ek Short daalo','Roz same time pe 1 Short (30-45 sec) upload karo. Regular upload se channel ko YouTube zyada dikhata hai.'],
+['Pehle 3 second me hook','Video ki pehli line me hi sabse mast cheez dikhao. Lamba intro ya logo mat lagao.'],
+['Thumbnail aur title strong banao','Title 40-60 letters, ek curiosity wala word. Thumbnail pe max 3-4 word, bada saaf character.'],
+['Series banao (Part 1, 2, 3)','Kiki ki ek story series chalao. End me bolo "Part 2 kal aayega". Log agle part ke liye subscribe karte hain.'],
+['Subscribe ka reason do','Sirf "subscribe karo" mat bolo. Bolo "Kal ka video miss na ho isliye subscribe karo".'],
+['Comments ka jaldi reply','Upload ke pehle 1 ghante me har comment ka reply do aur ek sawal pucho.'],
+['Pinned comment lagao','Ek sawal pin karo: "Agla video kis pe chahiye?" Comments badhte hain.'],
+['Trending topic pe Kiki version','Shorts feed aur Trending dekho. 2-3 trending topic ya sound pe Kiki ka apna version banao.'],
+['Playlist banao','Milte-julte videos ek playlist me daalo. Ek video ke baad doosra chalta hai, watch time badhta hai.'],
+['Instagram, Facebook, WhatsApp pe share','Har video ka clip Reels, Facebook aur WhatsApp status pe daalo. Description me channel link do.'],
+['Best video jaisa dobara banao','YouTube Studio me sabse zyada views wala video dekho. Uska topic aur style repeat karo.'],
+['Retention graph dekho','Studio > Analytics me dekho log kahan video chhod dete hain. Agli baar wo hissa chhota ya tez karo.'],
+['Upload ka time fix karo','Studio > Analytics > Audience me "When your viewers are on YouTube" dekho. Usi time pe upload karo.'],
+['Community post ya poll','Hafte me 2 baar poll ya post daalo. Log active rehte hain.']
+];
+function load(){try{const r=JSON.parse(localStorage.getItem(KEY));if(r&&r.tasks)return r}catch(e){}return{tasks:[],prompts:[],ideas:SEED.map(([title,how])=>({id:uid(),title,how}))}}
+let S=load();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast('Save nahi hua, storage full')}};
+const UI={tab:'tasks',edit:null};
+const K={
+  tasks:{add:'Naya kaam',t:'Kya karna hai, jaise Roz 1 Short',h:'Kaise karna hai (steps likho)',empty:'Abhi koi kaam nahi. Upar se add karo ya Ideas tab se utha lo.'},
+  ideas:{add:'Naya idea',t:'Subscriber badhane ka idea',h:'Kaise karna hai',empty:'Koi idea nahi.'},
+  prompts:{add:'Naya prompt',t:'Prompt ka naam',h:'Prompt yahan paste karo',empty:'Abhi koi prompt save nahi. Jo prompt se video bana, wo yahan rakh lo.'}
+};
+let tt;function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2200)}
+
+function item(k,x){
+  const extra=k==='ideas'?`<button class="p" data-act="totask" data-id="${x.id}">Kaam me daalo</button>`:k==='prompts'?`<button class="p" data-act="copy" data-id="${x.id}">Copy</button>`:'';
+  const head=k==='tasks'?`<label class="chk"><input type="checkbox" data-act="tog" data-id="${x.id}"${x.done?' checked':''}><b>${esc(x.title)}</b></label>`:`<b>${esc(x.title)}</b>`;
+  return`<article class="item${x.done?' done':''}">${head}${x.how?`<p class="how">${esc(x.how)}</p>`:''}<div class="acts">${extra}<button data-act="edit" data-k="${k}" data-id="${x.id}">Edit</button><button data-act="del" data-k="${k}" data-id="${x.id}">Delete</button></div></article>`;
+}
+function view(k){
+  const c=K[k],e=UI.edit&&UI.edit.k===k?S[k].find(x=>x.id===UI.edit.id):null;
+  const form=`<div class="sec"><h2>${e?'Badlo':c.add}</h2>
+  <input class="in" id="ft_${k}" placeholder="${esc(c.t)}" value="${esc(e?e.title:'')}">
+  <textarea class="in" id="fh_${k}" rows="${k==='prompts'?6:4}" placeholder="${esc(c.h)}">${esc(e?e.how:'')}</textarea>
+  <div class="row"><button class="btn" data-act="save" data-k="${k}">${e?'Update':'Save'}</button>${e?`<button class="ghost" data-act="cancel">Cancel</button>`:''}</div></div>`;
+  let body;
+  if(k==='tasks'){
+    const o=S.tasks.filter(x=>!x.done),d=S.tasks.filter(x=>x.done);
+    body=`<div class="sec"><h2>Baaki (${o.length})</h2>${o.map(x=>item(k,x)).join('')||`<p class="mut">${c.empty}</p>`}</div>`+(d.length?`<div class="sec"><h2>Ho gaya (${d.length})</h2>${d.map(x=>item(k,x)).join('')}<button class="ghost" style="margin-top:10px" data-act="clear">Ho gaye wale hatao</button></div>`:'');
+  }else body=`<div class="sec">${k==='ideas'?'<p class="mut" style="margin-bottom:6px">Jo pasand aaye uspe "Kaam me daalo" dabao.</p>':''}${S[k].map(x=>item(k,x)).join('')||`<p class="mut">${c.empty}</p>`}</div>`;
+  return form+body;
+}
+function render(){
+  $('v-'+UI.tab).innerHTML=view(UI.tab);
+  ['tasks','ideas','prompts'].forEach(k=>$('v-'+k).hidden=k!==UI.tab);
+  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.tab===UI.tab));
+  const p=S.tasks.filter(x=>!x.done).length;$('n-tasks').textContent=p?`Kaam (${p})`:'Kaam';
+}
+const find=(k,id)=>S[k].find(x=>x.id===id);
+
+document.addEventListener('click',async e=>{
+  const el=e.target.closest('[data-act],[data-tab]');if(!el)return;
+  if(el.dataset.tab){UI.tab=el.dataset.tab;if(!$('v-'+UI.tab).innerHTML)render();else render();window.scrollTo(0,0);return}
+  const a=el.dataset.act,id=el.dataset.id,k=el.dataset.k;
+  switch(a){
+    case'save':{const t=$('ft_'+k).value.trim(),h=$('fh_'+k).value.trim();if(!t){toast('Naam likho');break}
+      if(UI.edit&&UI.edit.k===k){Object.assign(find(k,UI.edit.id),{title:t,how:h});UI.edit=null}
+      else S[k].unshift({id:uid(),title:t,how:h,done:false});
+      save();render();toast('Save ho gaya');break}
+    case'cancel':UI.edit=null;render();break;
+    case'edit':UI.edit={k,id};render();window.scrollTo(0,0);break;
+    case'del':if(confirm('Delete karein?')){S[k]=S[k].filter(x=>x.id!==id);save();render()}break;
+    case'tog':find('tasks',id).done=el.checked;save();render();break;
+    case'clear':S.tasks=S.tasks.filter(x=>!x.done);save();render();break;
+    case'totask':{const x=find('ideas',id);S.tasks.unshift({id:uid(),title:x.title,how:x.how,done:false});save();$('v-tasks').innerHTML='';render();toast('Kaam me daal diya');break}
+    case'copy':{const t=find('prompts',id).how;try{await navigator.clipboard.writeText(t)}catch(_){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast('Copy ho gaya');break}
+    case'backup':$('dlg').innerHTML=`<h2>Backup</h2><p class="mut" style="margin-bottom:12px">Phone ka data clear hua to sab jaayega. Kabhi kabhi backup le lo.</p><div class="row"><button class="btn" data-act="export">Backup lo</button><label class="ghost filebtn" style="margin:0">Backup wapas lao<input type="file" id="imp" accept="application/json" hidden></label></div><div class="row" style="margin-top:12px"><button class="ghost" data-act="close">Band karo</button></div>`;$('dlg').showModal();break;
+    case'close':$('dlg').close();break;
+    case'export':{const b=new Blob([JSON.stringify(S)],{type:'application/json'}),l=document.createElement('a');l.href=URL.createObjectURL(b);l.download='kikitv-backup.json';l.click();break}
+  }
+});
+document.addEventListener('change',e=>{
+  if(e.target.id!=='imp'||!e.target.files[0])return;
+  const r=new FileReader();
+  r.onload=()=>{try{const j=JSON.parse(r.result);if(!Array.isArray(j.tasks)||!Array.isArray(j.ideas)||!Array.isArray(j.prompts))throw 0;S=j;save();$('dlg').close();['tasks','ideas','prompts'].forEach(k=>$('v-'+k).innerHTML='');render();toast('Backup wapas aa gaya')}catch(x){toast('File sahi nahi hai')}};
+  r.readAsText(e.target.files[0]);
+});
+render();
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
